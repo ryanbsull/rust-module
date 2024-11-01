@@ -3,7 +3,7 @@
 KDIR ?= /lib/modules/`uname -r`/build
 
 default:
-	$(MAKE) -C $(KDIR) M=$$PWD
+	$(MAKE) LLVM=1 -C $(KDIR) M=$$PWD modules
 
 modules_install: default
 	$(MAKE) -C $(KDIR) M=$$PWD modules_install

@@ -5,18 +5,18 @@
 use kernel::prelude::*;
 
 module! {
-    type: RustOutOfTree,
-    name: "rust_out_of_tree",
+    type: RustMod,
+    name: "rust_mod",
     author: "Rust for Linux Contributors",
     description: "Rust out-of-tree sample",
     license: "GPL",
 }
 
-struct RustOutOfTree {
+struct RustMod {
     numbers: KVec<i32>,
 }
 
-impl kernel::Module for RustOutOfTree {
+impl kernel::Module for RustMod {
     fn init(_module: &'static ThisModule) -> Result<Self> {
         pr_info!("Rust out-of-tree sample (init)\n");
 
@@ -25,11 +25,11 @@ impl kernel::Module for RustOutOfTree {
         numbers.push(108, GFP_KERNEL)?;
         numbers.push(200, GFP_KERNEL)?;
 
-        Ok(RustOutOfTree { numbers })
+        Ok(RustMod { numbers })
     }
 }
 
-impl Drop for RustOutOfTree {
+impl Drop for RustMod {
     fn drop(&mut self) {
         pr_info!("My numbers are {:?}\n", self.numbers);
         pr_info!("Rust out-of-tree sample (exit)\n");
